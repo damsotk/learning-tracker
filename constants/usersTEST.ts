@@ -1,0 +1,61 @@
+import { User } from "@/types/user";
+
+const today = new Date();
+
+export const testusers: User[] = [
+  {
+    id: 1,
+    slug: `Frontend Roadmap`,
+    name: `Denis`,
+    email: `denispiyack@gmail.com`,
+    accessTokenHash: `asdasdasdassfasf`,
+    emailReportsEnabled: true,
+    timezone: `UTC`,
+    createdAt: today,
+    updatedAt: today,
+  },
+  {
+    id: 2,
+    slug: `Backend Architecture`,
+    name: `Alex`,
+    email: `alexdev@gmail.com`,
+    accessTokenHash: `xczxczxcz123`,
+    emailReportsEnabled: false,
+    timezone: `Europe/Prague`,
+    createdAt: today,
+    updatedAt: today,
+  },
+  {
+    id: 3,
+    slug: `UI Design System`,
+    name: `Maria`,
+    email: `maria.ui@gmail.com`,
+    accessTokenHash: `qweqweqwe456`,
+    emailReportsEnabled: true,
+    timezone: `Europe/Warsaw`,
+    createdAt: today,
+    updatedAt: today,
+  },
+  {
+    id: 4,
+    slug: `Mobile App Tasks`,
+    name: `John`,
+    email: `johnmobile@gmail.com`,
+    accessTokenHash: `mobiletoken789`,
+    emailReportsEnabled: true,
+    timezone: `America/New_York`,
+    createdAt: today,
+    updatedAt: today,
+  },
+  {
+    id: 5,
+    slug: `DevOps Monitoring`,
+    name: `Sophie`,
+    email: `sophie.ops@gmail.com`,
+    accessTokenHash: `opssecuretoken`,
+    emailReportsEnabled: false,
+    timezone: `Asia/Tokyo`,
+    createdAt: today,
+    updatedAt: today,
+  },
+];
