@@ -1,49 +1,59 @@
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
-}
+  /* Background */
+  --bg-primary: #0f0f10;
+  --bg-secondary: #161618;
+  --bg-tertiary: #1c1c1f;
+  --bg-elevated: #232327;
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
-}
+  /* Borders */
+  --border-subtle: #26262a;
+  --border-default: #2f2f34;
+  --border-strong: #3a3a40;
 
-html {
-  height: 100%;
-}
+  /* Text */
+  --text-primary: #e7e7ea;
+  --text-secondary: #a1a1a8;
+  --text-muted: #6b6b73;
+  --text-faint: #4a4a52;
 
-html,
-body {
-  max-width: 100vw;
-  overflow-x: hidden;
-}
+  /* Accent */
+  --accent: #d4d4d8;
+  --accent-muted: #8a8a92;
 
-body {
-  min-height: 100%;
-  display: flex;
-  flex-direction: column;
-  color: var(--foreground);
-  background: var(--background);
-  font-family: Arial, Helvetica, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+  /* Radius */
+  --radius-sm: 6px;
+  --radius-md: 10px;
+  --radius-lg: 14px;
+
+  /* Spacing scale */
+  --space-1: 4px;
+  --space-2: 8px;
+  --space-3: 12px;
+  --space-4: 16px;
+  --space-5: 24px;
+  --space-6: 32px;
+  --space-7: 48px;
 }
 
 * {
   box-sizing: border-box;
-  padding: 0;
   margin: 0;
+  padding: 0;
+}
+
+html,
+body {
+  background-color: var(--bg-primary);
+  color: var(--text-primary);
+  font-family:
+    -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen, Ubuntu,
+    sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  min-height: 100vh;
 }
 
 a {
   color: inherit;
   text-decoration: none;
-}
-
-@media (prefers-color-scheme: dark) {
-  html {
-    color-scheme: dark;
-  }
 }

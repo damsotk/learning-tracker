@@ -13,6 +13,11 @@ export const testusers: User[] = [
     timezone: `UTC`,
     createdAt: today,
     updatedAt: today,
+    progress: {
+      javascript: { learned: 32, total: 40 },
+      react: { learned: 18, total: 30 },
+      browser: { learned: 12, total: 20 },
+    },
   },
   {
     id: 2,
@@ -24,6 +29,11 @@ export const testusers: User[] = [
     timezone: `Europe/Prague`,
     createdAt: today,
     updatedAt: today,
+    progress: {
+      javascript: { learned: 20, total: 40 },
+      react: { learned: 6, total: 30 },
+      browser: { learned: 15, total: 20 },
+    },
   },
   {
     id: 3,
@@ -35,6 +45,11 @@ export const testusers: User[] = [
     timezone: `Europe/Warsaw`,
     createdAt: today,
     updatedAt: today,
+    progress: {
+      javascript: { learned: 14, total: 40 },
+      react: { learned: 22, total: 30 },
+      browser: { learned: 8, total: 20 },
+    },
   },
   {
     id: 4,
@@ -46,6 +61,11 @@ export const testusers: User[] = [
     timezone: `America/New_York`,
     createdAt: today,
     updatedAt: today,
+    progress: {
+      javascript: { learned: 40, total: 40 },
+      react: { learned: 27, total: 30 },
+      browser: { learned: 19, total: 20 },
+    },
   },
   {
     id: 5,
@@ -57,5 +77,10 @@ export const testusers: User[] = [
     timezone: `Asia/Tokyo`,
     createdAt: today,
     updatedAt: today,
+    progress: {
+      javascript: { learned: 5, total: 40 },
+      react: { learned: 2, total: 30 },
+      browser: { learned: 4, total: 20 },
+    },
   },
 ];

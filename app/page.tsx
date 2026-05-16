@@ -1,17 +1,11 @@
 "use client";
+
 import { testusers } from "@/constants/usersTEST";
-import styles from "./page.module.css";
 import { useState } from "react";
+import UserList from "./(components)/main-page/UserList/UserList";
 
 export default function Home() {
   const [users, setUsers] = useState(testusers);
-  return (
-    <div className={styles.page}>
-      {users.map((user) => (
-        <div key={user.id}>
-          <div>{user.name}</div>
-        </div>
-      ))}
-    </div>
-  );
+
+  return <UserList users={users} />;
 }
