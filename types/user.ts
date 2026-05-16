@@ -9,9 +9,9 @@ export interface UserProgress {
   browser: TopicProgress;
 }
 
+// full type of user. for session, not public.
 export interface User {
   id: number;
-  progress: UserProgress;
   slug: string;
   name: string;
   email: string;
@@ -20,4 +20,14 @@ export interface User {
   timezone: string;
   createdAt: Date;
   updatedAt: Date;
+  progress: UserProgress;
+}
+
+// type for show public info about users
+export interface UserListItem {
+  id: number;
+  slug: string;
+  name: string;
+  updatedAt: Date;
+  progress: UserProgress;
 }

@@ -1,13 +1,15 @@
 import styles from "./user-list.module.css";
-import { User } from "@/types/user";
+import { UserListItem } from "@/types/user";
 import ProgressCircle from "../../reusable/ProgressCircle/ProgressCircle";
 import { formateDate } from "@/utils/formatDate";
 
 interface UserListProps {
-  users: User[];
+  users: UserListItem[];
 }
 
 export default function UserList({ users }: UserListProps) {
+  console.log(users);
+
   if (!users.length) {
     return (
       <section className={styles.wrapper}>

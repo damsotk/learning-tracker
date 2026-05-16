@@ -1,14 +1,18 @@
 import { prisma } from "@/lib/prisma";
-import { User } from "@/types/user";
+import { UserListItem } from "@/types/user";
 
 function fetchUsersWithProgress() {
   return prisma.user.findMany({
-    include: {
+    select: {
+      id: true,
+      slug: true,
+      name: true,
+      updatedAt: true,
       progress: {
-        include: {
+        select: {
           subtopic: {
-            include: {
-              topic: true,
+            select: {
+              topic: { select: { slug: true } },
             },
           },
         },
@@ -22,11 +26,12 @@ type UserWithProgress = Awaited<
   ReturnType<typeof fetchUsersWithProgress>
 >[number];
 
-export async function getUsersWithProgress(): Promise<User[]> {
+export async function getUsersWithProgress(): Promise<UserListItem[]> {
   const users = await fetchUsersWithProgress();
 
   const topics = await prisma.topic.findMany({
-    include: {
+    select: {
+      slug: true,
       _count: { select: { subtopics: true } },
     },
   });
@@ -36,7 +41,7 @@ export async function getUsersWithProgress(): Promise<User[]> {
     totalsBySlug[t.slug] = t._count.subtopics;
   }
 
-  return users.map((u: UserWithProgress) => {
+  return users.map((u: UserWithProgress): UserListItem => {
     const learnedBySlug: Record<string, number> = {};
     for (const p of u.progress) {
       const slug = p.subtopic.topic.slug;
@@ -47,11 +52,6 @@ export async function getUsersWithProgress(): Promise<User[]> {
       id: u.id,
       slug: u.slug,
       name: u.name,
-      email: u.email,
-      accessTokenHash: u.accessTokenHash,
-      emailReportsEnabled: u.emailReportsEnabled,
-      timezone: u.timezone,
-      createdAt: u.createdAt,
       updatedAt: u.updatedAt,
       progress: {
         javascript: {
