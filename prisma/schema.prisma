@@ -1,0 +1,65 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id                  Int       @id @default(autoincrement())
+  slug                String    @unique
+  name                String
+  email               String    @unique
+  accessTokenHash     String    @map("access_token_hash")
+  emailReportsEnabled Boolean   @default(true) @map("email_reports_enabled")
+  timezone            String    @default("UTC")
+  createdAt           DateTime  @default(now()) @map("created_at")
+  updatedAt           DateTime  @updatedAt @map("updated_at")
+
+  progress UserProgress[]
+
+  @@map("users")
+}
+
+model Topic {
+  id          Int       @id @default(autoincrement())
+  slug        String    @unique
+  name        String
+  description String?
+  icon        String?
+  order       Int       @default(0)
+  createdAt   DateTime  @default(now()) @map("created_at")
+
+  subtopics Subtopic[]
+
+  @@map("topics")
+}
+
+model Subtopic {
+  id          Int     @id @default(autoincrement())
+  topicId     Int     @map("topic_id")
+  slug        String
+  name        String
+  description String?
+  order       Int     @default(0)
+
+  topic        Topic          @relation(fields: [topicId], references: [id], onDelete: Cascade)
+  userProgress UserProgress[]
+
+  @@unique([topicId, slug])
+  @@map("subtopics")
+}
+
+model UserProgress {
+  userId     Int      @map("user_id")
+  subtopicId Int      @map("subtopic_id")
+  learnedAt  DateTime @default(now()) @map("learned_at")
+
+  user     User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  subtopic Subtopic @relation(fields: [subtopicId], references: [id], onDelete: Cascade)
+
+  @@id([userId, subtopicId])
+  @@map("user_progress")
+}
