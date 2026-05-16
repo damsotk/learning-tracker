@@ -8,8 +8,6 @@ interface UserListProps {
 }
 
 export default function UserList({ users }: UserListProps) {
-  console.log(users);
-
   if (!users.length) {
     return (
       <section className={styles.wrapper}>

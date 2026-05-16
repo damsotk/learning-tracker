@@ -5,7 +5,7 @@ function fetchUsersWithProgress() {
   return prisma.user.findMany({
     select: {
       id: true,
-      slug: true,
+      nickname: true,
       name: true,
       updatedAt: true,
       progress: {
@@ -50,7 +50,7 @@ export async function getUsersWithProgress(): Promise<UserListItem[]> {
 
     return {
       id: u.id,
-      slug: u.slug,
+      nickname: u.nickname,
       name: u.name,
       updatedAt: u.updatedAt,
       progress: {

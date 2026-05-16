@@ -12,7 +12,7 @@ export interface UserProgress {
 // full type of user. for session, not public.
 export interface User {
   id: number;
-  slug: string;
+  nickname: string;
   name: string;
   email: string;
   accessTokenHash: string;
@@ -26,7 +26,7 @@ export interface User {
 // type for show public info about users
 export interface UserListItem {
   id: number;
-  slug: string;
+  nickname: string;
   name: string;
   updatedAt: Date;
   progress: UserProgress;
