@@ -1,6 +1,7 @@
 import { prisma } from "@/lib/prisma";
 import { notFound } from "next/navigation";
 import InfoAboutUser from "@/app/(components)/profile-page/InfoAboutUser/InfoAboutUser";
+import ProgressDashboard from "@/app/(components)/profile-page/UserLearnProgress/ProgressDashboard/ProgressDashboard";
 
 export async function generateStaticParams() {
   const users = await prisma.user.findMany({
@@ -82,6 +83,7 @@ export default async function UserPublicProgress({
   return (
     <div>
       <InfoAboutUser nickname={userData.nickname} name={userData.name} />
+      <ProgressDashboard topics={progressByTopic} />
     </div>
   );
 }

@@ -51,17 +51,17 @@ export default function UserList({ users }: UserListProps) {
                 <ProgressCircle
                   topic="JavaScript"
                   learnedSubtopicsCount={user.progress.javascript.learned}
-                  totalSobtopicsCount={user.progress.javascript.total}
+                  totalSubtopicsCount={user.progress.javascript.total}
                 />
                 <ProgressCircle
                   topic="React"
                   learnedSubtopicsCount={user.progress.react.learned}
-                  totalSobtopicsCount={user.progress.react.total}
+                  totalSubtopicsCount={user.progress.react.total}
                 />
                 <ProgressCircle
                   topic="Browser & Web"
                   learnedSubtopicsCount={user.progress.browser.learned}
-                  totalSobtopicsCount={user.progress.browser.total}
+                  totalSubtopicsCount={user.progress.browser.total}
                 />
               </div>
             </article>
