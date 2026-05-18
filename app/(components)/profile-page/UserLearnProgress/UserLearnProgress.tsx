@@ -4,6 +4,7 @@ import { Topic } from "@/types/user-learn-progress";
 import { Subtopic } from "@/types/user-learn-progress";
 import ProgressDetails from "./ProgressDetails/ProgressDetails";
 import { useState } from "react";
+import styles from "./user-learn-progress.module.css";
 
 type LearnedSubtopic = {
   slug: Subtopic["slug"];
@@ -33,7 +34,7 @@ export default function UserLearnProgress({ topics }: UserLearnProgressProps) {
   const selectedTopics = topics.filter((t) => selectedSlugs.includes(t.slug));
 
   return (
-    <div>
+    <div className={styles.wrapper}>
       <ProgressDashboard
         topics={topics}
         selectedSlugs={selectedSlugs}
