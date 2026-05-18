@@ -2,6 +2,7 @@ import styles from "./user-list.module.css";
 import { UserListItem } from "@/types/user";
 import ProgressCircle from "../../reusable/ProgressCircle/ProgressCircle";
 import { formateDate } from "@/utils/formatDate";
+import Link from "next/link";
 
 interface UserListProps {
   users: UserListItem[];
@@ -30,40 +31,41 @@ export default function UserList({ users }: UserListProps) {
         </div>
         <div className={styles.counter}>{users.length}</div>
       </header>
-
       <div className={styles.list}>
         {users.map((user) => (
-          <article className={styles.card} key={user.id}>
-            <div className={styles.cardLeft}>
-              <div className={styles.avatar}>
-                {user.name?.charAt(0)?.toUpperCase() || "U"}
+          <Link href={`/u/${user.nickname}`} key={user.id}>
+            <article className={styles.card}>
+              <div className={styles.cardLeft}>
+                <div className={styles.avatar}>
+                  {user.name?.charAt(0)?.toUpperCase() || "U"}
+                </div>
+                <div className={styles.userInfo}>
+                  <h2 className={styles.userName}>{user.name}</h2>
+                  <p className={styles.userMeta}>
+                    Last Update: {formateDate(user.updatedAt)}
+                  </p>
+                </div>
               </div>
-              <div className={styles.userInfo}>
-                <h2 className={styles.userName}>{user.name}</h2>
-                <p className={styles.userMeta}>
-                  Last Update: {formateDate(user.updatedAt)}
-                </p>
-              </div>
-            </div>
 
-            <div className={styles.progress}>
-              <ProgressCircle
-                topic="JavaScript"
-                learned={user.progress.javascript.learned}
-                total={user.progress.javascript.total}
-              />
-              <ProgressCircle
-                topic="React"
-                learned={user.progress.react.learned}
-                total={user.progress.react.total}
-              />
-              <ProgressCircle
-                topic="Browser & Web"
-                learned={user.progress.browser.learned}
-                total={user.progress.browser.total}
-              />
-            </div>
-          </article>
+              <div className={styles.progress}>
+                <ProgressCircle
+                  topic="JavaScript"
+                  learnedSubtopicsCount={user.progress.javascript.learned}
+                  totalSobtopicsCount={user.progress.javascript.total}
+                />
+                <ProgressCircle
+                  topic="React"
+                  learnedSubtopicsCount={user.progress.react.learned}
+                  totalSobtopicsCount={user.progress.react.total}
+                />
+                <ProgressCircle
+                  topic="Browser & Web"
+                  learnedSubtopicsCount={user.progress.browser.learned}
+                  totalSobtopicsCount={user.progress.browser.total}
+                />
+              </div>
+            </article>
+          </Link>
         ))}
       </div>
     </section>

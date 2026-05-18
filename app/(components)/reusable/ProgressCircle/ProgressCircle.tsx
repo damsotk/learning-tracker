@@ -2,19 +2,19 @@ import styles from "./progress-circle.module.css";
 
 interface ProgressCircleProps {
   topic: string;
-  learned: number;
-  total: number;
+  learnedSubtopicsCount: number;
+  totalSobtopicsCount: number;
   size?: number;
 }
 
 export default function ProgressCircle({
   topic,
-  learned,
-  total,
+  learnedSubtopicsCount,
+  totalSobtopicsCount,
   size = 96,
 }: ProgressCircleProps) {
-  const safeTotal = total > 0 ? total : 1;
-  const rawPercent = Math.round((learned / safeTotal) * 100);
+  const safeTotal = totalSobtopicsCount > 0 ? totalSobtopicsCount : 1;
+  const rawPercent = Math.round((learnedSubtopicsCount / safeTotal) * 100);
   const percent = Math.min(100, Math.max(0, rawPercent));
 
   const strokeWidth = 6;
@@ -28,7 +28,7 @@ export default function ProgressCircle({
         className={styles.circleWrapper}
         style={{ width: size, height: size }}
         role="img"
-        aria-label={`${topic}: ${learned} of ${total} topics learned`}
+        aria-label={`${topic}: ${learnedSubtopicsCount} of ${totalSobtopicsCount} topics learned`}
       >
         <svg width={size} height={size} className={styles.svg}>
           <circle
@@ -57,7 +57,7 @@ export default function ProgressCircle({
       <div className={styles.meta}>
         <p className={styles.topic}>{topic}</p>
         <p className={styles.count}>
-          {learned} / {total} topics
+          {learnedSubtopicsCount} / {totalSobtopicsCount} topics
         </p>
       </div>
     </div>
