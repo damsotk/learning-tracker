@@ -2,6 +2,9 @@ import { prisma } from "@/lib/prisma";
 import { notFound } from "next/navigation";
 import InfoAboutUser from "@/app/(components)/profile-page/InfoAboutUser/InfoAboutUser";
 import UserLearnProgress from "@/app/(components)/profile-page/UserLearnProgress/UserLearnProgress";
+import { getAllTopics, getUserProgressById } from "@/lib/queries/topic.queries";
+import { getPublicUserDataByNickname } from "@/lib/queries/user.querires";
+import { buildProgressByTopics } from "@/utils/buildProgressByTopics";
 
 export async function generateStaticParams() {
   const users = await prisma.user.findMany({
@@ -22,63 +25,21 @@ export default async function UserPublicProgress({
 }) {
   const { nickname } = await params;
 
-  const userData = await prisma.user.findUnique({
-    where: { nickname },
-    select: {
-      id: true,
-      nickname: true,
-      name: true,
-      updatedAt: true,
-    },
-  });
+  const userData = await getPublicUserDataByNickname(nickname);
 
   if (!userData) {
     notFound();
   }
 
-  const [progress, topics] = await Promise.all([
-    prisma.userProgress.findMany({
-      where: { userId: userData.id },
-      select: {
-        learnedAt: true,
-        subtopic: {
-          select: {
-            slug: true,
-            name: true,
-            topic: { select: { slug: true, name: true, icon: true } },
-          },
-        },
-      },
-    }),
-    prisma.topic.findMany({
-      select: {
-        slug: true,
-        name: true,
-        icon: true,
-        _count: { select: { subtopics: true } },
-      },
-      orderBy: { order: "asc" },
-    }),
+  const [progressInSubtopics, topics] = await Promise.all([
+    getUserProgressById(userData.id),
+    getAllTopics(),
   ]);
 
-  const progressByTopic = topics.map((topic) => {
-    const learned = progress
-      .filter((p) => p.subtopic.topic.slug === topic.slug)
-      .map((p) => ({
-        name: p.subtopic.name,
-        slug: p.subtopic.slug,
-        learnedAt: p.learnedAt,
-      }));
-
-    return {
-      slug: topic.slug,
-      name: topic.name,
-      icon: topic.icon,
-      learned,
-      learnedCount: learned.length,
-      total: topic._count.subtopics,
-    };
-  });
+  const progressByTopic = await buildProgressByTopics(
+    topics,
+    progressInSubtopics,
+  );
 
   return (
     <div>

@@ -1,11 +1,11 @@
 import styles from "./user-list.module.css";
-import { UserListItem } from "@/types/user";
+import { UserPublic } from "@/types/user";
 import ProgressCircle from "../../reusable/ProgressCircle/ProgressCircle";
 import { formateDate } from "@/utils/formatDate";
 import Link from "next/link";
 
 interface UserListProps {
-  users: UserListItem[];
+  users: UserPublic[];
 }
 
 export default function UserList({ users }: UserListProps) {

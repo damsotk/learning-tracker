@@ -24,7 +24,7 @@ export interface User {
 }
 
 // type for show public info about users
-export interface UserListItem {
+export interface UserPublic {
   id: number;
   nickname: string;
   name: string;
