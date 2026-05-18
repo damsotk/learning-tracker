@@ -1,5 +1,5 @@
 import { prisma } from "@/lib/prisma";
-import { UserListItem } from "@/types/user";
+import { UserPublic } from "@/types/user";
 
 function fetchUsersWithProgress() {
   return prisma.user.findMany({
@@ -26,7 +26,7 @@ type UserWithProgress = Awaited<
   ReturnType<typeof fetchUsersWithProgress>
 >[number];
 
-export async function getUsersWithProgress(): Promise<UserListItem[]> {
+export async function getUsersWithProgress(): Promise<UserPublic[]> {
   const users = await fetchUsersWithProgress();
 
   const topics = await prisma.topic.findMany({
@@ -41,7 +41,7 @@ export async function getUsersWithProgress(): Promise<UserListItem[]> {
     totalsBySlug[t.slug] = t._count.subtopics;
   }
 
-  return users.map((u: UserWithProgress): UserListItem => {
+  return users.map((u: UserWithProgress): UserPublic => {
     const learnedBySlug: Record<string, number> = {};
     for (const p of u.progress) {
       const slug = p.subtopic.topic.slug;
