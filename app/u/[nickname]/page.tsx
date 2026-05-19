@@ -5,7 +5,6 @@ import UserLearnProgress from "@/app/(components)/profile-page/UserLearnProgress
 import { getAllTopics, getUserProgressById } from "@/lib/queries/topic.queries";
 import { getPublicUserDataByNickname } from "@/lib/queries/user.querires";
 import { buildProgressByTopics } from "@/utils/buildProgressByTopics";
-import styles from "./page.module.css";
 
 export async function generateStaticParams() {
   const users = await prisma.user.findMany({
@@ -43,9 +42,9 @@ export default async function UserPublicProgress({
   );
 
   return (
-    <div className={styles.wrapper}>
+    <>
       <InfoAboutUser nickname={userData.nickname} name={userData.name} />
       <UserLearnProgress topics={progressByTopic} />
-    </div>
+    </>
   );
 }
