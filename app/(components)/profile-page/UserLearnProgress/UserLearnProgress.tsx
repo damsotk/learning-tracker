@@ -17,6 +17,7 @@ export type TopicProgress = {
   name: Topic["name"];
   icon: Topic["icon"];
   learned: LearnedSubtopic[];
+  notLearned: { slug: Subtopic["slug"]; name: Subtopic["name"] }[];
   learnedCount: number;
   total: number;
 };

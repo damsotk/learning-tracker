@@ -6,6 +6,12 @@ export function getAllTopics() {
       slug: true,
       name: true,
       icon: true,
+      subtopics: {
+        select: {
+          slug: true,
+          name: true,
+        },
+      },
       _count: { select: { subtopics: true } },
     },
     orderBy: { order: "asc" },

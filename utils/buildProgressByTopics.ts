@@ -2,6 +2,7 @@ import { Topic } from "@/types/user-learn-progress";
 import { Subtopic } from "@/types/user-learn-progress";
 
 interface TopicWithCount extends Pick<Topic, "slug" | "name" | "icon"> {
+  subtopics: Pick<Subtopic, "slug" | "name">[];
   _count: { subtopics: number };
 }
 
@@ -14,6 +15,7 @@ interface ProgressInSubtopic {
 
 export interface TopicByProgress extends Pick<Topic, "slug" | "name" | "icon"> {
   learned: (Pick<Subtopic, "slug" | "name"> & { learnedAt: Date })[];
+  notLearned: Pick<Subtopic, "slug" | "name">[];
   learnedCount: number;
   total: number;
 }
@@ -31,11 +33,18 @@ export function buildProgressByTopics(
         learnedAt: p.learnedAt,
       }));
 
+    const learnedSlugs = new Set(learned.map((s) => s.slug));
+
+    const notLearned = topic.subtopics
+      .filter((s) => !learnedSlugs.has(s.slug))
+      .map((s) => ({ slug: s.slug, name: s.name }));
+
     return {
       slug: topic.slug,
       name: topic.name,
       icon: topic.icon,
       learned,
+      notLearned,
       learnedCount: learned.length,
       total: topic._count.subtopics,
     };
