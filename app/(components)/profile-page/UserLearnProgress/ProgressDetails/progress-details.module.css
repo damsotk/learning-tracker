@@ -159,3 +159,32 @@
     font-size: 18px;
   }
 }
+
+.itemButton {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  width: 100%;
+  min-width: 0;
+  padding: 0;
+  background: none;
+  border: none;
+  color: inherit;
+  font: inherit;
+  text-align: left;
+  cursor: pointer;
+}
+
+.itemButton:focus-visible {
+  outline: 2px solid rgba(74, 222, 128, 0.5);
+  outline-offset: 2px;
+  border-radius: var(--radius-md);
+}
+
+.itemLearned {
+  padding: 0;
+}
+
+.itemLearned .itemButton {
+  padding: 12px 16px;
+}
