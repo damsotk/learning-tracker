@@ -8,20 +8,20 @@ datasource db {
 }
 
 model User {
-  id                  Int       @id @default(autoincrement())
-  nickname            String    @unique
-  name                String
-  email               String    @unique
-  accessTokenHash     String    @map("access_token_hash")
-  emailReportsEnabled Boolean   @default(true) @map("email_reports_enabled")
-  timezone            String    @default("UTC")
-  createdAt           DateTime  @default(now()) @map("created_at")
-  updatedAt           DateTime  @updatedAt @map("updated_at")
+    id                  Int       @id @default(autoincrement())
+    nickname            String    @unique
+    name                String
+    email               String    @unique
+    accessTokenHash     String    @map("access_token_hash")
+    emailReportsEnabled Boolean   @default(true) @map("email_reports_enabled")
+    timezone            String    @default("UTC")
+    createdAt           DateTime  @default(now()) @map("created_at")
+    updatedAt           DateTime  @updatedAt @map("updated_at")
 
-  progress UserProgress[]
+    progress UserProgress[]
 
-  @@map("users")
-}
+    @@map("users")
+  }
 
 model Topic {
   id          Int       @id @default(autoincrement())
@@ -56,6 +56,7 @@ model UserProgress {
   userId     Int      @map("user_id")
   subtopicId Int      @map("subtopic_id")
   learnedAt  DateTime @default(now()) @map("learned_at")
+  comment    String?  @db.Text
 
   user     User     @relation(fields: [userId], references: [id], onDelete: Cascade)
   subtopic Subtopic @relation(fields: [subtopicId], references: [id], onDelete: Cascade)
