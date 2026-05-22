@@ -9,6 +9,7 @@ type LearnedSubtopic = {
   slug: Subtopic["slug"];
   name: Subtopic["name"];
   learnedAt: Date;
+  comment: string | null;
 };
 
 export type TopicProgress = {

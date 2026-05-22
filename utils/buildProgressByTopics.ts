@@ -8,13 +8,17 @@ interface TopicWithCount extends Pick<Topic, "slug" | "name" | "icon"> {
 
 interface ProgressInSubtopic {
   learnedAt: Date;
+  comment: string | null;
   subtopic: Pick<Subtopic, "slug" | "name"> & {
     topic: Pick<Topic, "slug" | "name" | "icon">;
   };
 }
 
 export interface TopicByProgress extends Pick<Topic, "slug" | "name" | "icon"> {
-  learned: (Pick<Subtopic, "slug" | "name"> & { learnedAt: Date })[];
+  learned: (Pick<Subtopic, "slug" | "name"> & {
+    learnedAt: Date;
+    comment: string | null;
+  })[];
   notLearned: Pick<Subtopic, "slug" | "name">[];
   learnedCount: number;
   total: number;
@@ -31,6 +35,7 @@ export function buildProgressByTopics(
         name: p.subtopic.name,
         slug: p.subtopic.slug,
         learnedAt: p.learnedAt,
+        comment: p.comment,
       }));
 
     const learnedSlugs = new Set(learned.map((s) => s.slug));

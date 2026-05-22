@@ -25,6 +25,7 @@ export function getUserProgressById(userId: number) {
     where: { userId: userId },
     select: {
       learnedAt: true,
+      comment: true,
       subtopic: {
         select: {
           slug: true,
