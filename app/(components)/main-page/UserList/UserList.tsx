@@ -1,7 +1,7 @@
 import styles from "./user-list.module.css";
 import { UserPublic } from "@/types/user";
 import ProgressCircle from "../../reusable/ProgressCircle/ProgressCircle";
-import { formateDate } from "@/utils/formatDate";
+import { formatDate } from "@/utils/formatDate";
 import Link from "next/link";
 
 interface UserListProps {
@@ -42,7 +42,7 @@ export default function UserList({ users }: UserListProps) {
                 <div className={styles.userInfo}>
                   <h2 className={styles.userName}>{user.name}</h2>
                   <p className={styles.userMeta}>
-                    Last Update: {formateDate(user.updatedAt)}
+                    Last Update: {formatDate(user.updatedAt)}
                   </p>
                 </div>
               </div>
