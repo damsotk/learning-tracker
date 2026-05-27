@@ -39,13 +39,9 @@ const mockUser: UserPublic = {
 
 describe("UserList", () => {
   describe("when users is empty", () => {
-    it("shows empty state title", () => {
+    it("shows empty state", () => {
       render(<UserList users={[]} />);
       expect(screen.getByText("No users yet")).toBeInTheDocument();
-    });
-
-    it("shows a hint about the absence of users", () => {
-      render(<UserList users={[]} />);
       expect(screen.getByText(/When users appear/i)).toBeInTheDocument();
     });
 
@@ -56,18 +52,10 @@ describe("UserList", () => {
   });
 
   describe("when users is not empt", () => {
-    it("shows count of users in counter", () => {
+    it("renders user card correctly", () => {
       render(<UserList users={[mockUser]} />);
       expect(screen.getByText("1")).toBeInTheDocument();
-    });
-
-    it("render card with name of user", () => {
-      render(<UserList users={[mockUser]} />);
       expect(screen.getByText("Denis")).toBeInTheDocument();
-    });
-
-    it("show first letter of name", () => {
-      render(<UserList users={[mockUser]} />);
       expect(screen.getByText("D")).toBeInTheDocument();
     });
 
