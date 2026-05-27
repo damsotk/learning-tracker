@@ -1,8 +1,8 @@
 "use client";
 import ProgressDashboard from "./ProgressDashboard/ProgressDashboard";
-import { Topic } from "@/types/user-learn-progress";
-import { Subtopic } from "@/types/user-learn-progress";
 import ProgressDetails from "./ProgressDetails/ProgressDetails";
+import ProgressInfo from "./ProgressInfo/ProgressInfo";
+import { Topic, Subtopic } from "@/types/user-learn-progress";
 import { useState } from "react";
 
 type LearnedSubtopic = {
@@ -32,6 +32,7 @@ export default function UserLearnProgress({ topics }: UserLearnProgressProps) {
   const toggleTopic = (slug: Topic["slug"]) => {
     setSelectedSlugs([slug]);
   };
+
   const selectedTopic = topics.find((t) => selectedSlugs.includes(t.slug));
 
   return (
@@ -41,6 +42,9 @@ export default function UserLearnProgress({ topics }: UserLearnProgressProps) {
         selectedSlugs={selectedSlugs}
         onToggleTopic={toggleTopic}
       />
+
+      {selectedTopic && <ProgressInfo topicSlug={selectedTopic.slug} />}
+
       <ProgressDetails topic={selectedTopic} />
     </>
   );
