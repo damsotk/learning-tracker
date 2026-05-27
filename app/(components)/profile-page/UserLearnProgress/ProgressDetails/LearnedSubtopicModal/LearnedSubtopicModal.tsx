@@ -11,7 +11,7 @@ type LearnedSubtopicModalProps = {
   comment: string | null;
 };
 
-const dateFormatter = new Intl.DateTimeFormat("en-US", {
+const dateFormatter = new Intl.DateTimeFormat("cz", {
   dateStyle: "long",
   timeStyle: "short",
 });

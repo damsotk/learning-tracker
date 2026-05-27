@@ -32,7 +32,7 @@ export default function UserLearnProgress({ topics }: UserLearnProgressProps) {
   const toggleTopic = (slug: Topic["slug"]) => {
     setSelectedSlugs([slug]);
   };
-  const selectedTopics = topics.filter((t) => selectedSlugs.includes(t.slug));
+  const selectedTopic = topics.find((t) => selectedSlugs.includes(t.slug));
 
   return (
     <>
@@ -41,7 +41,7 @@ export default function UserLearnProgress({ topics }: UserLearnProgressProps) {
         selectedSlugs={selectedSlugs}
         onToggleTopic={toggleTopic}
       />
-      <ProgressDetails topics={selectedTopics} />
+      <ProgressDetails topic={selectedTopic} />
     </>
   );
 }
